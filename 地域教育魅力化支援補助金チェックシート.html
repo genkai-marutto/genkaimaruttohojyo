@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>玄海町地域教育魅力化支援補助金｜チェックシート</title>
+  <style>
+    :root{
+      --bg:#f6f8fb;
+      --card:#ffffff;
+      --ink:#102033;
+      --text:#26364a;
+      --muted:#667085;
+      --line:#dfe7f2;
+      --primary:#2563eb;
+      --primary-dark:#1d4ed8;
+      --primary-soft:#eaf2ff;
+      --green:#047857;
+      --green-soft:#e9f8f0;
+      --amber:#b45309;
+      --amber-soft:#fff7e5;
+      --red:#b91c1c;
+      --red-soft:#fff1f1;
+      --slate:#f8fafc;
+      --shadow:0 18px 45px rgba(15,23,42,.08);
+      --radius:22px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      color:var(--text);
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 0 0,rgba(37,99,235,.14),transparent 34rem),
+        radial-gradient(circle at 100% 8%,rgba(14,165,233,.11),transparent 28rem),
+        linear-gradient(180deg,#fff 0%,var(--bg) 46%);
+    }
+    button,input,select,textarea{font:inherit}
+    button{touch-action:manipulation}
+    .page{width:min(1120px,calc(100% - 30px));margin:0 auto;padding:32px 0 56px}
+    .hero{display:grid;grid-template-columns:1fr 330px;gap:20px;align-items:end;margin-bottom:22px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;width:max-content;margin-bottom:12px;padding:7px 12px;border-radius:999px;background:var(--primary-soft);color:#1e40af;font-size:13px;font-weight:900}
+    h1{margin:0;color:var(--ink);font-size:clamp(27px,4.2vw,43px);line-height:1.15;letter-spacing:-.045em}
+    .lead{max-width:760px;margin:13px 0 0;color:var(--muted);font-size:16px;line-height:1.85}
+    .notice{padding:16px 17px;border:1px solid var(--line);border-radius:18px;background:#fff;box-shadow:0 10px 26px rgba(15,23,42,.05);font-size:14px;line-height:1.75;color:#475569}
+    .notice b{color:var(--amber)}
+    .shell{display:grid;grid-template-columns:310px minmax(0,1fr);gap:22px;align-items:start}
+    .side,.main-card{border:1px solid var(--line);border-radius:var(--radius);background:var(--card);box-shadow:var(--shadow)}
+    .side{position:sticky;top:18px;padding:20px}
+    .side h2{margin:0 0 10px;color:var(--ink);font-size:18px;letter-spacing:-.02em}
+    .side p{margin:0 0 16px;color:var(--muted);font-size:13px;line-height:1.65}
+    .summary-box{display:grid;gap:10px;margin-top:16px}
+    .summary-row{padding:12px;border:1px solid var(--line);border-radius:15px;background:var(--slate)}
+    .summary-row small{display:block;margin-bottom:4px;color:var(--muted);font-size:11px;font-weight:900;letter-spacing:.05em}
+    .summary-row b{display:block;color:var(--ink);font-size:14px;line-height:1.45}
+    .summary-row.warn{background:var(--amber-soft);border-color:#f8d58b}
+    .summary-row.ok{background:var(--green-soft);border-color:#b7ebcf}
+    .summary-row.bad{background:var(--red-soft);border-color:#fecaca}
+    .progress{display:grid;gap:8px;margin-top:18px}
+    .progress-item{display:flex;gap:9px;align-items:center;color:#64748b;font-size:13px;font-weight:800}
+    .dot{display:grid;place-items:center;width:25px;height:25px;border-radius:50%;border:1px solid var(--line);background:#fff;color:#94a3b8;font-size:12px;flex:0 0 auto}
+    .progress-item.done .dot{background:var(--green);border-color:var(--green);color:#fff}
+    .progress-item.current{color:#1d4ed8}.progress-item.current .dot{background:var(--primary);border-color:var(--primary);color:#fff}
+    .progress-item.blocked{color:#b45309}.progress-item.blocked .dot{background:var(--amber);border-color:var(--amber);color:#fff}
+    .main-card{overflow:hidden}
+    .card-head{padding:24px 26px 18px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff,#fbfdff)}
+    .step-label{display:inline-flex;align-items:center;gap:8px;margin-bottom:10px;padding:6px 10px;border-radius:999px;background:var(--primary-soft);color:#1e40af;font-size:12px;font-weight:900}
+    .card-head h2{margin:0;color:var(--ink);font-size:clamp(22px,3vw,32px);line-height:1.25;letter-spacing:-.035em}
+    .card-head p{margin:10px 0 0;color:var(--muted);line-height:1.75}
+    .card-body{padding:24px 26px 26px}
+    .choice-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .choice{appearance:none;width:100%;min-height:138px;border:1px solid var(--line);border-radius:20px;background:#fff;padding:18px;text-align:left;cursor:pointer;transition:.16s ease;display:flex;flex-direction:column;gap:8px}
+    .choice:hover,.choice:focus-visible{outline:none;transform:translateY(-2px);border-color:#93c5fd;box-shadow:0 14px 30px rgba(37,99,235,.12)}
+    .choice[aria-pressed="true"]{background:var(--primary-soft);border-color:var(--primary);box-shadow:inset 0 0 0 1px rgba(37,99,235,.18)}
+    .choice .icon{display:grid;place-items:center;width:38px;height:38px;border-radius:14px;background:var(--slate);font-size:20px}
+    .choice b{color:var(--ink);font-size:18px;line-height:1.35}.choice span{color:var(--muted);font-size:13px;line-height:1.55}
+    .question{padding:18px;border:1px solid var(--line);border-radius:20px;background:#fff;margin-bottom:15px}
+    .question h3{margin:0 0 10px;color:var(--ink);font-size:18px;line-height:1.4;letter-spacing:-.02em}.question p{margin:0 0 12px;color:var(--muted);line-height:1.7;font-size:14px}
+    .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.form-grid.one{grid-template-columns:1fr}
+    .field{display:grid;gap:7px}.field label{color:var(--ink);font-size:13px;font-weight:900;line-height:1.45}.hint{color:var(--muted);font-size:12px;line-height:1.55}
+    input,select,textarea{width:100%;border:1px solid var(--line);border-radius:14px;background:#fff;color:var(--text);padding:10px 12px}
+    input,select{min-height:44px}textarea{min-height:76px;resize:vertical}
+    input:focus,select:focus,textarea:focus{outline:2px solid rgba(37,99,235,.18);border-color:#93c5fd}
+    .mini-result{display:none;margin-top:14px;padding:15px;border-radius:17px;border:1px solid var(--line);background:var(--slate);line-height:1.75}.mini-result.show{display:block}.mini-result strong{color:var(--ink)}
+    .pill-row{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}.pill{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:#fff;color:#475569;font-size:12px;font-weight:900}.pill.ok{background:var(--green-soft);border-color:#b7ebcf;color:#047857}.pill.warn{background:var(--amber-soft);border-color:#f8d58b;color:#92400e}.pill.bad{background:var(--red-soft);border-color:#fecaca;color:#991b1b}.pill.blue{background:var(--primary-soft);border-color:#bfdbfe;color:#1e40af}
+    .status-list{display:grid;gap:12px;margin-top:12px}
+    .status-card{border:1px solid var(--line);border-radius:18px;background:#fff;padding:15px}
+    .status-card[data-state="ok"]{border-color:#b7ebcf;background:var(--green-soft)}
+    .status-card[data-state="hold"]{border-color:#f8d58b;background:var(--amber-soft)}
+    .status-card[data-state="consult"]{border-color:#fecaca;background:var(--red-soft)}
+    .status-top{display:flex;justify-content:space-between;gap:12px;align-items:start;margin-bottom:8px}
+    .status-top b{display:block;color:var(--ink);font-size:15px;line-height:1.45}.status-top span{display:block;margin-top:3px;color:var(--muted);font-size:12px;line-height:1.55}
+    .tag{display:inline-flex;align-items:center;white-space:nowrap;border:1px solid var(--line);border-radius:999px;background:#fff;padding:5px 8px;font-size:11px;font-weight:900;color:#475569}
+    .radio-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+    .status-option{position:relative;display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:14px;background:#fff;padding:10px 11px;cursor:pointer;font-size:12px;font-weight:900;color:#334155;line-height:1.35}
+    .status-option input{width:16px;height:16px;min-height:0;margin:0;accent-color:var(--primary)}
+    .status-option:has(input:checked){border-color:var(--primary);box-shadow:inset 0 0 0 1px rgba(37,99,235,.14)}
+    .status-option.ok:has(input:checked){border-color:#10b981;background:#f0fdf4;color:#047857}
+    .status-option.hold:has(input:checked){border-color:#f59e0b;background:#fffbeb;color:#92400e}
+    .status-option.consult:has(input:checked){border-color:#ef4444;background:#fef2f2;color:#991b1b}
+    .sub-actions{display:none;margin-top:10px;padding:12px;border-radius:15px;background:rgba(255,255,255,.76);border:1px dashed rgba(100,116,139,.35);font-size:12px;line-height:1.65;color:#475569}
+    .status-card[data-state="hold"] .sub-actions,.status-card[data-state="consult"] .sub-actions{display:block}
+    .memo-wrap{display:none;margin-top:10px}.status-card[data-state="hold"] .memo-wrap,.status-card[data-state="consult"] .memo-wrap{display:block}
+    details{margin-top:12px;border:1px solid var(--line);border-radius:16px;background:#fff;overflow:hidden}summary{cursor:pointer;padding:13px 15px;color:#1e40af;font-weight:900;list-style:none}summary::-webkit-details-marker{display:none}.detail-body{padding:0 15px 15px;color:#475569;line-height:1.75;font-size:14px}.detail-body ul{margin:8px 0 0;padding-left:1.2em}.detail-body li+li{margin-top:5px}
+    .info-list{display:grid;gap:10px;margin-top:12px}.info-item{padding:13px;border:1px solid var(--line);border-radius:15px;background:var(--slate);line-height:1.65;font-size:13px}.info-item b{display:block;color:var(--ink);margin-bottom:3px}.info-item ul{margin:5px 0 0;padding-left:1.2em}.info-item li+li{margin-top:3px}
+    .flowline{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}.flow-step{padding:14px;border:1px solid var(--line);border-radius:17px;background:#fff}.flow-step .no{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;font-weight:900;font-size:12px;margin-bottom:8px}.flow-step b{display:block;color:var(--ink);font-size:14px}.flow-step span{display:block;margin-top:4px;color:var(--muted);font-size:12px;line-height:1.55}
+    .nav{display:flex;justify-content:space-between;gap:12px;padding:18px 26px;border-top:1px solid var(--line);background:#fbfdff}.nav-left,.nav-right{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.btn{appearance:none;border:0;border-radius:14px;padding:12px 16px;min-height:45px;font-weight:900;cursor:pointer;transition:.16s ease}.btn.primary{background:var(--primary);color:#fff}.btn.primary:hover{background:var(--primary-dark);transform:translateY(-1px)}.btn.secondary{background:#fff;color:#334155;border:1px solid var(--line)}.btn.secondary:hover{border-color:#93c5fd}.btn.ghost{background:transparent;color:#475569}.btn[disabled]{opacity:.45;cursor:not-allowed;transform:none!important}.small-note{color:var(--muted);font-size:12px;line-height:1.55;max-width:360px}
+    .warning-box,.ok-box,.info-box,.bad-box{padding:15px;border-radius:18px;margin-top:14px;line-height:1.75;font-size:14px}.warning-box{background:var(--amber-soft);border:1px solid #f8d58b;color:#7c4a03}.ok-box{background:var(--green-soft);border:1px solid #b7ebcf;color:#065f46}.info-box{background:var(--primary-soft);border:1px solid #bfdbfe;color:#1e3a8a}.bad-box{background:var(--red-soft);border:1px solid #fecaca;color:#991b1b}.warning-box b,.ok-box b,.info-box b,.bad-box b{color:inherit}
+    .review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.review-card{padding:16px;border:1px solid var(--line);border-radius:18px;background:#fff}.review-card h3{margin:0 0 8px;color:var(--ink);font-size:16px}.review-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.65}.review-card.warn{background:var(--amber-soft);border-color:#f8d58b}.review-card.ok{background:var(--green-soft);border-color:#b7ebcf}.review-card.bad{background:var(--red-soft);border-color:#fecaca}
+    @media(max-width:920px){.hero,.shell{grid-template-columns:1fr}.side{position:static}.choice-grid,.review-grid,.flowline{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}.radio-row{grid-template-columns:1fr}.nav{display:grid}.nav-left,.nav-right{justify-content:stretch}.btn{width:100%}.small-note{max-width:100%}}
+    @media print{body{background:#fff}.page{width:100%;padding:0}.hero,.side,.nav,.choice-grid .choice:not([aria-pressed="true"]),details{display:none!important}.shell{display:block}.main-card{box-shadow:none;border:0}.card-head,.card-body{padding:0 0 14px}.question,.review-card,.flow-step,.status-card,.info-item{break-inside:avoid}.flowline,.review-grid{grid-template-columns:repeat(2,1fr)}}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="hero">
+      <div>
+        <div class="eyebrow">申請者向け手続きチェック</div>
+        <h1>【申請者向け】地域教育魅力化支援補助金｜チェックシートー</h1>
+        <p class="lead">補助金申請にあたって申請タイミング、対象経費、証拠書類、提出前確認、請求までを1問ずつ確認します。</p>
+      </div>
+    </header>
+
+    <div class="shell">
+      <aside class="side" aria-label="現在の確認状況">
+        <h2>現在の確認状況</h2>
+        <p>選択した事業、申請期限、保留事項を表示します。</p>
+        <div class="summary-box" id="summaryBox"></div>
+        <div class="progress" id="progress"></div>
+      </aside>
+
+      <main class="main-card" aria-live="polite">
+        <div class="card-head">
+          <div class="step-label" id="stepLabel"></div>
+          <h2 id="stepTitle"></h2>
+          <p id="stepLead"></p>
+        </div>
+        <div class="card-body" id="screen"></div>
+        <div class="nav">
+          <div class="nav-left">
+            <button class="btn secondary" id="backBtn" type="button">1つ戻る</button>
+            <button class="btn ghost" id="resetBtn" type="button">はじめから</button>
+          </div>
+          <div class="nav-right">
+            <span class="small-note" id="navNote"></span>
+            <button class="btn primary" id="nextBtn" type="button">次へ進む</button>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const parseDate = s => { if(!s) return null; const d = new Date(s + 'T00:00:00'); return Number.isNaN(d.getTime()) ? null : d; };
+  const addDays = (s,days) => { const d = parseDate(s); if(!d) return ''; d.setDate(d.getDate()+days); return d.toISOString().slice(0,10); };
+  const jpDate = s => { const d = parseDate(s); if(!d) return '日付未入力'; return `${d.getFullYear()}年${d.getMonth()+1}月${d.getDate()}日`; };
+  const today = () => { const d = new Date(); d.setHours(0,0,0,0); return d; };
+  const isPast = s => { const d = parseDate(s); return d ? d < today() : false; };
+
+  const programs = {
+    life: {
+      icon:'🏠', name:'生活支援事業', short:'下宿等の家賃等',
+      applicant:'げんかいみらい留学生又はその親権者',
+      timing:'4月分〜9月分は10月末まで、10月分〜3月分は3月31日まで',
+      condition:'入学を許可された月から高校の正規の最短就学期間が修了する日が属する月まで。最長36月。高校の授業料等学校徴収金を滞納していないこと。',
+      target:['下宿、間借り、民間賃貸住宅、民宿等への居住・宿泊に係る家賃等','賃貸借契約等に基づく物件の使用対価','下宿等のために取り交わした契約内容に含まれる経費'],
+      excluded:['管理費・共益費','敷金・礼金','仲介手数料','3親等以内の親族等が所有する持ち家等への居住']
+    },
+    visit: {
+      icon:'🏫', name:'体験入学等支援事業', short:'県外からの体験入学・学校等見学',
+      applicant:'体験入学等に参加する学生又はその親権者',
+      timing:'学校等見学をした日から30日以内',
+      condition:'高校への進学を希望する中学生が、県外から体験入学等を行う場合。1年度につき1回限り。宿泊の場合は町内施設に限る。',
+      target:['住所地と目的地の往復に係る交通費','町内施設における宿泊費','自家用車を利用した場合に要綱別表第2で定める対象区間の経費','レンタカーの場合の車両賃借費と有料道路通行料金'],
+      excluded:['町外施設の宿泊費','体験入学等と関係が確認できない移動費','同一年度2回目以降の申請','対象区間外の移動費']
+    },
+    returnHome: {
+      icon:'🚄', name:'帰省支援事業', short:'留学生の帰省交通費等',
+      applicant:'げんかいみらい留学生又はその親権者',
+      timing:'下宿等に帰着した日から30日以内',
+      condition:'下宿等から親権者が生活を営む住所地の往復交通費等。1年度につき2回限り。高校の授業料等学校徴収金を滞納していないこと。',
+      target:['下宿等から親権者が生活を営む住所地までの往復交通費','公共交通機関等を利用した場合の実費','自家用車を利用した場合に要綱別表第2で定める対象区間の経費'],
+      excluded:['帰省と関係が確認できない移動費','年度3回目以降の申請','対象区間外の移動費','学校徴収金を滞納している場合']
+    },
+    regional: {
+      icon:'🤝', name:'地域教育魅力化事業', short:'地域活性化と教育魅力化につながる活動',
+      applicant:'趣旨に基づいた活動を実施する者',
+      timing:'支出・実施前に、共同体で決定された内容か確認',
+      condition:'町・高校・一般社団法人玄海町みんなの地域商社で構成する共同体で決定した実施内容のうち、地域の活性化と教育の魅力化につながる事業。',
+      target:['報償費','需用費','役務費','使用料等','事業目的と経費の関係を説明できる支出'],
+      excluded:['共同体で決定されていない内容','地域の活性化や教育の魅力化との関係が説明できない経費','私的支出や目的外支出']
+    }
+  };
+
+  const stepNames = ['事業選択','申請タイミング','対象経費','証拠書類','提出前確認','請求・支払い','まとめ'];
+  const state = {
+    step:0,
+    program:null,
+    answers:{ fiscalYear:new Date().getFullYear() },
+    statuses:{},
+    memos:{}
+  };
+
+  const selectedProgram = () => state.program ? programs[state.program] : null;
+  const statusOf = id => state.statuses[id] || '';
+  const memoOf = id => state.memos[id] || '';
+  const setStatus = (id,val) => { state.statuses[id] = val; render(); };
+  const setMemo = (id,val) => { state.memos[id] = val; renderSide(); };
+
+  function item(id, title, desc, hold, consult, tag='必須確認'){
+    return {id,title,desc,hold,consult,tag};
+  }
+
+  function itemsForStep(step){
+    if(!state.program) return [];
+    const p = state.program;
+    if(step === 1){
+      if(p === 'life') return [
+        item('life_period','申請する対象期間を整理した','4〜9月分は10月末まで、10〜3月分は3月31日までです。','対象月を整理し、どちらの提出期限に該当するか確認してください。','年度・対象月・提出期限の扱いを窓口で確認してください。'),
+        item('life_within_period','対象月が対象期間内である','入学許可月から最短就学期間修了月まで、最長36月です。','入学許可月・在学期間・対象月が分かる資料を取り寄せてください。','対象期間の起算・終期を窓口で確認してください。'),
+        item('life_no_arrears_timing','学校徴収金の滞納がないことを確認した','生活支援事業の申請条件です。','学校徴収金の状況を確認し、必要に応じて学校へ照会してください。','滞納の有無の確認方法を窓口へ確認してください。')
+      ];
+      if(p === 'visit') return [
+        item('visit_date','学校等見学日から30日以内である','申請期限は学校等見学をした日から30日以内です。','見学日が分かる資料を取り寄せ、期限内か確認してください。','複数日程や期限を過ぎた場合の扱いを窓口へ確認してください。'),
+        item('visit_pref_outside','県外からの体験入学等である','定義上、県外から体験入学等を行う場合が対象です。','現住所地が分かる情報を確認してください。','県外該当性や住所地の確認方法を窓口へ確認してください。'),
+        item('visit_once','同一年度1回限りである','一家族当たり1年度につき1回限りです。','同じ年度に申請済みでないか確認してください。','同一家族・同一年度の数え方を窓口で確認してください。')
+      ];
+      if(p === 'returnHome') return [
+        item('return_date','下宿等に帰着した日から30日以内である','申請期限は下宿等に帰着した日から30日以内です。','帰着日が分かる行程・記録を取り寄せてください。','帰着日の確認方法や期限を過ぎた場合の扱いを窓口へ確認してください。'),
+        item('return_twice','同一年度2回以内である','1年度につき2回限りです。','同じ年度の申請回数を確認してください。','年度・回数の数え方を窓口で確認してください。'),
+        item('return_no_arrears_timing','学校徴収金の滞納がないことを確認した','帰省支援事業の申請条件です。','学校徴収金の状況を確認し、必要に応じて学校へ照会してください。','滞納の有無の確認方法を窓口へ確認してください。')
+      ];
+      return [
+        item('regional_decided','共同体で決定した実施内容である','共同体で決定した実施内容が対象です。','協議結果・決定内容が分かる資料を取り寄せてください。','共同体での決定前か、対象となる実施内容かを窓口で確認してください。'),
+        item('regional_before','支出・実施前に確認している','実施後ではなく、事前に対象性を確認してください。','実施予定日・支出予定日を整理してください。','事後申請や既支出の扱いを窓口で確認してください。')
+      ];
+    }
+    if(step === 2){
+      if(p === 'life') return [
+        item('life_expense_target','家賃等の対象経費だけで申請する','賃借料・宿泊費・契約内容に含まれる経費が対象です。','契約書・請求明細を取り寄せ、対象経費を分けてください。','どの費目が家賃等に含まれるか窓口で確認してください。'),
+        item('life_expense_exclude','対象外経費を除外した','管理費、共益費、敷金礼金、仲介手数料などは除きます。','明細の内訳を取り寄せ、対象外経費を切り分けてください。','一体請求の場合の扱いを窓口で確認してください。'),
+        item('life_not_relative','3親等以内の親族等の持ち家等ではない','親族等が所有する持ち家等に居住するものは下宿等から除かれます。','所有者・関係性を確認できる情報を整理してください。','親族関係や所有形態の確認方法を窓口で確認してください。')
+      ];
+      if(p === 'visit') return [
+        item('visit_expense_route','住所地と目的地の往復交通費等である','体験入学等に伴う往復費用を確認します。','行程表・経路・領収書を取り寄せてください。','対象区間に迷う場合は窓口で確認してください。'),
+        item('visit_lodging_town','宿泊費を含める場合、町内施設である','宿泊費は町内施設における宿泊費に限ります。','宿泊施設名・所在地・領収書を取り寄せてください。','町内施設該当性を窓口で確認してください。'),
+        item('visit_transport_rule','交通手段ごとに証拠書類を整理した','自家用車、レンタカー、公共交通で準備する書類が異なります。','利用手段に応じた領収書・行程・経路資料をそろえてください。','旅費条例準拠・別表第2の適用を窓口で確認してください。')
+      ];
+      if(p === 'returnHome') return [
+        item('return_expense_route','下宿等と親権者住所地の往復交通費等である','対象区間は下宿等から親権者が生活を営む住所地までの往復です。','行程表・経路・領収書を取り寄せてください。','住所地や対象区間に迷う場合は窓口で確認してください。'),
+        item('return_guardian_address','親権者が生活を営む住所地を確認できる','対象区間を説明するために必要です。','住所地を確認できる情報を整理してください。','住所地確認の範囲を窓口で確認してください。'),
+        item('return_transport_rule','交通手段ごとに証拠書類を整理した','自家用車の場合は要綱別表第2の住所地別の確認が必要です。','利用手段に応じた領収書・行程・経路資料をそろえてください。','旅費条例準拠・別表第2の適用を窓口で確認してください。')
+      ];
+      return [
+        item('regional_expense_category','報償費・需用費・役務費・使用料等に整理した','対象経費の区分と使途を説明できるようにします。','見積書・予算書・内訳を取り寄せてください。','経費区分や対象性を窓口で確認してください。'),
+        item('regional_purpose_link','地域活性化と教育魅力化への関係を説明できる','趣旨と経費の関係が重要です。','事業目的・成果・対象者を説明する資料を作ってください。','趣旨との関係が弱い場合は事前に窓口で確認してください。'),
+        item('regional_decision_record','共同体で決定した内容を示せる','決定内容と申請内容が一致しているか確認します。','協議結果・決定内容の記録を準備してください。','決定記録がない場合の扱いを窓口で確認してください。')
+      ];
+    }
+    if(step === 3){
+      if(p === 'life') return [
+        item('life_doc_contract','下宿等の契約内容が分かる書類を準備した','契約者、所在地、利用期間、家賃等が分かる資料です。','契約書・利用契約・宿泊契約等を取り寄せてください。','契約書がない場合の代替資料を窓口で確認してください。'),
+        item('life_doc_payment','支払内容が分かる領収書等を準備した','対象月、支払内容、支払先が分かる資料です。','領収書・振込明細・請求書等を取り寄せてください。','支払証拠が不足する場合の扱いを窓口で確認してください。'),
+        item('life_doc_months','対象月一覧と証拠書類が対応している','対象月と書類の月が一致しているか確認します。','不足月の資料を追加で取り寄せてください。','月またぎ・まとめ払いの扱いを窓口で確認してください。')
+      ];
+      if(p === 'visit') return [
+        item('visit_doc_event','体験入学等の日付が分かる資料を準備した','案内、参加確認、学校等見学日が分かる資料です。','参加資料・案内メール等を取り寄せてください。','参加証明がない場合の代替資料を窓口で確認してください。'),
+        item('visit_doc_receipt','交通費・宿泊費の領収書等を準備した','支出日、支払先、内容が分かる資料です。','領収書・予約明細・切符控え等を取り寄せてください。','領収書がない費用の扱いを窓口で確認してください。'),
+        item('visit_doc_route','住所地・目的地・往復経路を確認できる資料がある','対象区間の確認に必要です。','経路検索結果・行程表を準備してください。','対象区間が不明な場合は窓口で確認してください。')
+      ];
+      if(p === 'returnHome') return [
+        item('return_doc_receipt','交通費の領収書等を準備した','支出日、支払先、内容が分かる資料です。','領収書・予約明細・切符控え等を取り寄せてください。','領収書がない費用の扱いを窓口で確認してください。'),
+        item('return_doc_route','移動日・区間が分かる資料を準備した','下宿等と親権者住所地の往復であることを説明します。','行程表・経路検索結果を準備してください。','往復確認が難しい場合は窓口で確認してください。'),
+        item('return_doc_arrival','下宿等への帰着日を確認できる資料がある','申請期限の起算日の確認に必要です。','帰着日が分かる資料を準備してください。','帰着日の確認方法を窓口で確認してください。')
+      ];
+      return [
+        item('regional_doc_plan','事業計画・企画内容が分かる資料を準備した','活動内容、目的、実施体制を説明する資料です。','企画書・計画書を整えてください。','計画書の様式や記載範囲を窓口で確認してください。'),
+        item('regional_doc_cost_basis','見積書・内訳資料など費用根拠を準備した','経費の必要性と妥当性を確認する資料です。','見積書・積算内訳を取り寄せてください。','見積書が取れない経費の扱いを窓口で確認してください。'),
+        item('regional_doc_decision','共同体で決定した内容を確認できる資料がある','対象事業であることを説明する資料です。','協議結果・決定内容の記録を準備してください。','決定記録がない場合の扱いを窓口で確認してください。')
+      ];
+    }
+    if(step === 4){
+      return [
+        item('submit_form1','補助金交付申請書（様式第1号）を準備した','交付申請は様式第1号です。','正しい様式を入手し、記入してください。','旧様式や記載方法に迷う場合は窓口で確認してください。'),
+        item('submit_identity','申請対象者と申請者名義を説明できる',`${selectedProgram().applicant}が申請対象者です。`,'申請者・親権者・学生の関係が分かる情報を整理してください。','代理申請や名義不一致の扱いを窓口で確認してください。'),
+        item('submit_copy','提出書類の控えを手元に残す準備をした','後日の照会、補正、請求に備えます。','提出前に申請書・証拠書類の控えを保存してください。','控えの取り方や提出方法を窓口で確認してください。')
+      ];
+    }
+    if(step === 5){
+      return [
+        item('claim_decision','交付決定・確定通知を受け取ってから請求する','申請後、町が内容を確認し、交付可否と確定内容を通知します。','通知が届くまで請求手続きは保留してください。','通知前請求や同時提出の扱いを窓口で確認してください。'),
+        item('claim_form2','補助金等交付請求書（様式第2号）を使う','支払いを受けるには請求手続きが必要です。','様式第2号を準備してください。','請求書の記載方法を窓口で確認してください。'),
+        item('claim_bank','請求者名義と振込先を確認した','支払い時の事務ミスを防ぐ確認です。','口座情報、名義、請求者名を確認してください。','名義が異なる場合の委任・取扱いを窓口で確認してください。')
+      ];
+    }
+    return [];
+  }
+
+  function allItems(){ return [1,2,3,4,5].flatMap(itemsForStep); }
+  function stepIssues(step=state.step){
+    const items = itemsForStep(step);
+    return {
+      items,
+      missing:items.filter(i=>!statusOf(i.id)),
+      blocked:items.filter(i=>['hold','consult'].includes(statusOf(i.id))),
+      ok:items.filter(i=>statusOf(i.id)==='ok')
+    };
+  }
+  function allIssues(){
+    const items = allItems();
+    return {
+      missing:items.filter(i=>!statusOf(i.id)),
+      blocked:items.filter(i=>['hold','consult'].includes(statusOf(i.id))),
+      ok:items.filter(i=>statusOf(i.id)==='ok')
+    };
+  }
+
+  function calcDeadlineText(){
+    const p = state.program;
+    if(!p) return '';
+    if(p === 'life'){
+      const y = Number(state.answers.fiscalYear || new Date().getFullYear());
+      const period = state.answers.lifePeriod || '';
+      if(period === 'first') return `${y}年4〜9月分：${y}年10月31日まで`;
+      if(period === 'second') return `${y}年10月〜${y+1}年3月分：${y+1}年3月31日まで`;
+      return programs[p].timing;
+    }
+    if(p === 'visit'){
+      const due = addDays(state.answers.eventDate,30);
+      return due ? `学校等見学日から30日以内：${jpDate(due)}まで` : programs[p].timing;
+    }
+    if(p === 'returnHome'){
+      const due = addDays(state.answers.returnDate,30);
+      return due ? `下宿等に帰着した日から30日以内：${jpDate(due)}まで` : programs[p].timing;
+    }
+    return programs[p].timing;
+  }
+
+  function renderSide(){
+    const p = selectedProgram();
+    const issues = allIssues();
+    const blockedCount = issues.blocked.length;
+    const missingCount = issues.missing.length;
+    const statusClass = blockedCount ? 'bad' : missingCount ? 'warn' : p ? 'ok' : '';
+    $('summaryBox').innerHTML = `
+      <div class="summary-row ${p?'ok':''}"><small>選択中の事業</small><b>${p ? p.name : '未選択'}</b></div>
+      <div class="summary-row"><small>申請期限</small><b>${p ? calcDeadlineText() : '事業を選ぶと表示されます'}</b></div>
+      <div class="summary-row ${statusClass}"><small>確認状況</small><b>${p ? `保留・要確認 ${blockedCount}件／未選択 ${missingCount}件` : '—'}</b></div>
+    `;
+    $('progress').innerHTML = stepNames.map((name,i)=>{
+      const issuesAtStep = i > 0 && i < 6 ? stepIssues(i) : {blocked:[], missing:[]};
+      const cls = issuesAtStep.blocked.length && i===state.step ? 'blocked' : i<state.step ? 'done' : i===state.step ? 'current' : '';
+      return `<div class="progress-item ${cls}"><span class="dot">${i+1}</span><span>${name}</span></div>`;
+    }).join('');
+  }
+
+  function header(label,title,lead){ $('stepLabel').textContent = label; $('stepTitle').textContent = title; $('stepLead').textContent = lead; }
+
+  function render(){
+    renderSide();
+    $('backBtn').disabled = state.step === 0;
+    $('resetBtn').style.visibility = (state.step === 0 && !state.program) ? 'hidden' : 'visible';
+    $('nextBtn').style.display = 'inline-flex';
+    $('nextBtn').className = 'btn primary';
+    $('nextBtn').textContent = state.step === 6 ? '印刷・PDF保存' : '次へ進む';
+    $('navNote').textContent = '';
+    if(state.step === 0) renderProgram();
+    if(state.step === 1) renderTiming();
+    if(state.step === 2) renderExpense();
+    if(state.step === 3) renderDocs();
+    if(state.step === 4) renderSubmit();
+    if(state.step === 5) renderClaim();
+    if(state.step === 6) renderResult();
+    updateNavState();
+  }
+
+  function renderProgram(){
+    header('STEP 1 / 7','申請する補助事業を選んでください','自分が申請する事業を選ぶと、以降の確認項目が切り替わります。');
+    $('screen').innerHTML = `
+      <div class="question"><h3>Q. どの事業の申請手続きを確認しますか？</h3><div class="choice-grid">${Object.entries(programs).map(([key,p])=>`
+        <button class="choice" type="button" data-program="${key}" aria-pressed="${state.program===key}">
+          <span class="icon">${p.icon}</span><b>${p.name}</b><span>${p.short}</span>
+        </button>`).join('')}</div></div>
+      <div class="info-box"><b>この画面の位置づけ：</b>対象可否の判定ではなく、補助対象であることを理解している人が、提出前に不足を見つけるための手続き確認フローです。</div>`;
+    document.querySelectorAll('[data-program]').forEach(btn=>btn.addEventListener('click',()=>{
+      state.program = btn.dataset.program;
+      state.answers = { fiscalYear:new Date().getFullYear() };
+      state.statuses = {};
+      state.memos = {};
+      render();
+    }));
+  }
+
+  function renderTiming(){
+    const p = selectedProgram();
+    header('STEP 2 / 7','申請タイミングを確認します','期限や対象期間が確認できない場合は、この段階で停止します。');
+    let form = '';
+    if(state.program === 'life'){
+      form = `<div class="question"><h3>Q. 申請対象期間を選んでください</h3><p>生活支援事業は、対象月のまとまりによって提出期限が異なります。</p>
+        <div class="form-grid"><div class="field"><label for="fiscalYear">対象年度</label><input id="fiscalYear" type="number" min="2023" max="2031" value="${state.answers.fiscalYear || new Date().getFullYear()}"></div>
+        <div class="field"><label for="lifePeriod">対象期間</label><select id="lifePeriod"><option value="">選択してください</option><option value="first" ${state.answers.lifePeriod==='first'?'selected':''}>4月分〜9月分</option><option value="second" ${state.answers.lifePeriod==='second'?'selected':''}>10月分〜3月分</option></select></div></div>
+        <div class="mini-result show"><strong>提出期限：</strong>${calcDeadlineText()}</div></div>`;
+    }
+    if(state.program === 'visit'){
+      const due = addDays(state.answers.eventDate,30);
+      form = `<div class="question"><h3>Q. 学校等見学をした日はいつですか？</h3><p>申請期限は、学校等見学をした日から30日以内です。</p>
+        <div class="form-grid one"><div class="field"><label for="eventDate">学校等見学日</label><input id="eventDate" type="date" value="${state.answers.eventDate || ''}"></div></div>
+        <div class="mini-result ${due?'show':''}"><strong>提出期限：</strong>${jpDate(due)}まで ${due && isPast(due) ? '<span class="pill bad">期限を過ぎている可能性</span>' : due ? '<span class="pill ok">期限内か確認</span>' : ''}</div></div>`;
+    }
+    if(state.program === 'returnHome'){
+      const due = addDays(state.answers.returnDate,30);
+      form = `<div class="question"><h3>Q. 下宿等に帰着した日はいつですか？</h3><p>申請期限は、下宿等に帰着した日から30日以内です。</p>
+        <div class="form-grid one"><div class="field"><label for="returnDate">下宿等に帰着した日</label><input id="returnDate" type="date" value="${state.answers.returnDate || ''}"></div></div>
+        <div class="mini-result ${due?'show':''}"><strong>提出期限：</strong>${jpDate(due)}まで ${due && isPast(due) ? '<span class="pill bad">期限を過ぎている可能性</span>' : due ? '<span class="pill ok">期限内か確認</span>' : ''}</div></div>`;
+    }
+    if(state.program === 'regional'){
+      form = `<div class="question"><h3>Q. 実施・支出の前に確認していますか？</h3><p>地域教育魅力化事業は、共同体で決定した実施内容であることが前提です。</p></div>`;
+    }
+    $('screen').innerHTML = `${form}${statusSection('タイミング確認', itemsForStep(1))}${programDetails(p)}`;
+    bindInputs(); bindStatusInputs(); bindMemoInputs();
+  }
+
+  function renderExpense(){
+    const p = selectedProgram();
+    header('STEP 3 / 7','対象経費を確認します','対象外経費が混ざると、不備や追加確認につながります。');
+    $('screen').innerHTML = `
+      <div class="question"><h3>Q. 申請に含める経費を切り分けます</h3><p>何を申請に含めてよいか、証拠書類で説明できるかを確認します。</p>
+        <div class="info-list"><div class="info-item"><b>申請に含める経費</b><ul>${p.target.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="info-item"><b>除外・注意が必要な経費</b><ul>${p.excluded.map(x=>`<li>${x}</li>`).join('')}</ul></div></div>
+      </div>
+      ${statusSection('対象経費確認', itemsForStep(2))}
+      <details><summary>迷いやすい点を確認する</summary><div class="detail-body"><ul><li>自家用車利用時は、要綱の別表第2に基づく住所地別の確認が必要です。</li><li>レンタカーの場合は、車両の賃借に係る費用と有料道路通行料金を確認します。</li><li>生活支援事業では、管理費・共益費・敷金礼金・仲介手数料などは除きます。</li></ul></div></details>`;
+    bindStatusInputs(); bindMemoInputs();
+  }
+
+  function renderDocs(){
+    header('STEP 4 / 7','証拠書類を確認します','必要書類がない場合は、取得できるまで手続きを進めない扱いにします。');
+    $('screen').innerHTML = `<div class="question"><h3>Q. 書類は手元にありますか？</h3><p>要綱上、添付書類名が細かく列挙されていない項目は、申請内容を説明するための証拠書類として整理しています。</p></div>
+      ${statusSection('証拠書類確認', itemsForStep(3))}
+      <details open><summary>書類不足の取り扱い</summary><div class="detail-body"><ul><li>不足書類は「取寄せ中」とし、取得先・取得予定日をメモしてください。</li><li>不足が解消するまで、提出前確認・請求の完了チェックには進めません。</li><li>代替資料で足りるか分からない場合は、提出前に窓口へ確認してください。</li></ul></div></details>`;
+    bindStatusInputs(); bindMemoInputs();
+  }
+
+  function renderSubmit(){
+    header('STEP 5 / 7','提出前の最終確認です','様式、申請者名義、控えの保存を確認します。');
+    $('screen').innerHTML = `<div class="question"><h3>Q. 提出できる状態ですか？</h3><p>書類がそろっていても、様式違い・名義違い・控え漏れがあると、後日の確認に時間がかかります。</p></div>
+      ${statusSection('提出前確認', itemsForStep(4))}
+      <div class="info-box"><b>提出後の流れ：</b>町で内容確認が行われ、不備があれば追加確認や補正が求められます。交付決定・確定通知を受けてから、請求手続きへ進みます。</div>`;
+    bindStatusInputs(); bindMemoInputs();
+  }
+
+  function renderClaim(){
+    header('STEP 6 / 7','請求・支払い前の確認です','交付決定・確定通知後に、請求書と振込先を確認します。');
+    $('screen').innerHTML = `<div class="question"><h3>Q. 申請後の流れを確認します</h3><p>交付申請後、町の確認を経て、交付決定・確定通知が行われます。その後に請求手続きへ進みます。</p></div>
+      ${statusSection('請求・支払い確認', itemsForStep(5))}
+      <div class="flowline">
+        ${flowStep(1,'申請準備','期限・対象経費・証拠書類を確認')}
+        ${flowStep(2,'交付申請','様式第1号を提出')}
+        ${flowStep(3,'内容確認','不備があれば追加確認・補正')}
+        ${flowStep(4,'交付決定・確定通知','通知内容を確認')}
+        ${flowStep(5,'請求','様式第2号を提出')}
+        ${flowStep(6,'支払い','振込先を確認')}
+      </div>`;
+    bindStatusInputs(); bindMemoInputs();
+  }
+
+  function renderResult(){
+    const p = selectedProgram();
+    const issues = allIssues();
+    header('STEP 7 / 7','確認結果のまとめ','不足があれば取寄せ・窓口確認に回してください。');
+    $('screen').innerHTML = `
+      ${issues.blocked.length ? `<div class="bad-box"><b>保留・要確認の項目があります。</b><br>この状態では提出準備または請求準備を完了扱いにしないでください。下の項目を解消してから再確認してください。</div>` : issues.missing.length ? `<div class="warning-box"><b>未選択の項目があります。</b><br>未選択のままでは確認完了にできません。該当ステップに戻って選択してください。</div>` : `<div class="ok-box"><b>主要な確認項目は完了しています。</b><br>提出書類、通知、請求書、証拠書類の控えを保管してください。</div>`}
+      <div class="review-grid" style="margin-top:14px">
+        <div class="review-card ok"><h3>対象事業</h3><p><b>${p.name}</b><br>${p.short}</p></div>
+        <div class="review-card"><h3>申請対象者</h3><p>${p.applicant}</p></div>
+        <div class="review-card"><h3>申請期限</h3><p>${calcDeadlineText()}</p></div>
+        <div class="review-card ${issues.blocked.length?'bad':issues.missing.length?'warn':'ok'}"><h3>確認状況</h3><p>確認完了 ${issues.ok.length}件／保留・要確認 ${issues.blocked.length}件／未選択 ${issues.missing.length}件</p></div>
+      </div>
+      ${issues.blocked.length ? issueList('保留・要確認の項目', issues.blocked) : ''}
+      ${issues.missing.length ? issueList('未選択の項目', issues.missing) : ''}
+      <div class="flowline">
+        ${flowStep(1,'交付申請','様式第1号と証拠書類を提出')}
+        ${flowStep(2,'追加確認・補正','不足があれば対応')}
+        ${flowStep(3,'交付決定・確定通知','通知内容を確認')}
+        ${flowStep(4,'請求','様式第2号を提出')}
+        ${flowStep(5,'支払い','入金内容を確認')}
+        ${flowStep(6,'保管','申請書・通知・請求書・証拠書類の控えを保管')}
+      </div>`;
+  }
+
+  function statusSection(title, items){
+    const issues = stepIssues(state.step);
+    const stop = issues.blocked.length ? `<div class="bad-box"><b>このステップで停止中です。</b><br>「不足・取寄せ中」または「不明・窓口確認」が選ばれています。該当項目を解消し、「確認できた」に変更するまで次へ進めません。</div>` : '';
+    return `<div class="question"><h3>${title}</h3><p>各項目について、現在の状態を選んでください。すべて「確認できた」になった場合のみ次へ進めます。</p><div class="status-list">${items.map(statusCard).join('')}</div>${stop}</div>`;
+  }
+
+  function statusCard(it){
+    const st = statusOf(it.id);
+    const selected = v => st===v ? 'checked' : '';
+    const note = st==='hold' ? it.hold : st==='consult' ? it.consult : '';
+    return `<div class="status-card" data-state="${st || 'none'}">
+      <div class="status-top"><div><b>${it.title}</b><span>${it.desc}</span></div><span class="tag">${it.tag}</span></div>
+      <div class="radio-row" role="radiogroup" aria-label="${it.title}">
+        <label class="status-option ok"><input type="radio" name="status_${it.id}" value="ok" ${selected('ok')} data-status-id="${it.id}">確認できた</label>
+        <label class="status-option hold"><input type="radio" name="status_${it.id}" value="hold" ${selected('hold')} data-status-id="${it.id}">不足・取寄せ中</label>
+        <label class="status-option consult"><input type="radio" name="status_${it.id}" value="consult" ${selected('consult')} data-status-id="${it.id}">不明・窓口確認</label>
+      </div>
+      <div class="sub-actions"><b>${st==='hold'?'次の対応':'確認が必要です'}：</b>${note || '状態を選ぶと対応内容を表示します。'}</div>
+      <div class="memo-wrap"><label class="field"><span class="hint">対応メモ：取得先・確認先・対応予定日など</span><textarea data-memo-id="${it.id}" placeholder="例：契約書を下宿先へ依頼中。6/10受領予定。">${escapeHtml(memoOf(it.id))}</textarea></label></div>
+    </div>`;
+  }
+
+  function issueList(title, items){
+    if(!items.length) return '';
+    return `<div class="question"><h3>${title}</h3><div class="info-list">${items.map(it=>{
+      const st = statusOf(it.id);
+      const label = st==='hold' ? '不足・取寄せ中' : st==='consult' ? '不明・窓口確認' : '未選択';
+      const action = st==='hold' ? it.hold : st==='consult' ? it.consult : '状態を選択してください。';
+      const memo = memoOf(it.id) ? `<br><b>メモ：</b>${escapeHtml(memoOf(it.id))}` : '';
+      return `<div class="info-item"><b><span class="pill ${st==='hold'?'warn':st==='consult'?'bad':'blue'}">${label}</span> ${it.title}</b>${it.desc}<br><b>対応：</b>${action}${memo}</div>`;
+    }).join('')}</div></div>`;
+  }
+
+  function programDetails(p){
+    return `<details><summary>この事業の基本条件を確認する</summary><div class="detail-body"><ul><li><b>申請対象者：</b>${p.applicant}</li><li><b>申請タイミング：</b>${p.timing}</li><li><b>補助条件：</b>${p.condition}</li></ul></div></details>`;
+  }
+
+  function flowStep(no,title,body){ return `<div class="flow-step"><span class="no">${no}</span><b>${title}</b><span>${body}</span></div>`; }
+  function escapeHtml(str){ return String(str).replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c])); }
+
+  function bindInputs(){
+    const fy = $('fiscalYear'); if(fy) fy.addEventListener('input',e=>{ state.answers.fiscalYear=e.target.value; render(); });
+    const lp = $('lifePeriod'); if(lp) lp.addEventListener('change',e=>{ state.answers.lifePeriod=e.target.value; render(); });
+    const ev = $('eventDate'); if(ev) ev.addEventListener('change',e=>{ state.answers.eventDate=e.target.value; render(); });
+    const rd = $('returnDate'); if(rd) rd.addEventListener('change',e=>{ state.answers.returnDate=e.target.value; render(); });
+  }
+
+  function bindStatusInputs(){
+    document.querySelectorAll('[data-status-id]').forEach(input=>{
+      input.addEventListener('change', e=>{
+        state.statuses[e.target.dataset.statusId] = e.target.value;
+        render();
+      });
+    });
+  }
+
+  function bindMemoInputs(){
+    document.querySelectorAll('[data-memo-id]').forEach(input=>{
+      input.addEventListener('input', e=>{ setMemo(e.target.dataset.memoId, e.target.value); });
+    });
+  }
+
+  function updateNavState(){
+    renderSide();
+    $('nextBtn').disabled = false;
+    $('nextBtn').className = 'btn primary';
+    if(state.step === 0){
+      const ready = !!state.program;
+      $('nextBtn').disabled = !ready;
+      $('navNote').textContent = ready ? '申請タイミングの確認へ進みます。' : '補助事業を選んでください。';
+      return;
+    }
+    if(state.step >=1 && state.step <=5){
+      const {missing, blocked} = stepIssues(state.step);
+      if(blocked.length){
+        $('nextBtn').disabled = true;
+        $('navNote').textContent = `保留・要確認が${blocked.length}件あります。解消するまで次へ進めません。`;
+        return;
+      }
+      if(missing.length){
+        $('nextBtn').disabled = true;
+        $('navNote').textContent = `未選択が${missing.length}件あります。全項目で状態を選んでください。`;
+        return;
+      }
+      $('nextBtn').textContent = '次へ進む';
+      $('navNote').textContent = 'このステップは確認済みです。';
+      return;
+    }
+    if(state.step === 6){
+      $('nextBtn').textContent = '印刷・PDF保存';
+      $('navNote').textContent = '結果を印刷またはPDF保存できます。';
+    }
+  }
+
+  $('nextBtn').addEventListener('click',()=>{
+    if(state.step === 6){ window.print(); return; }
+    if(state.step >=1 && state.step <=5){
+      const {missing, blocked} = stepIssues(state.step);
+      if(missing.length || blocked.length) return;
+    }
+    if(state.step < 6){ state.step += 1; render(); }
+  });
+
+  $('backBtn').addEventListener('click',()=>{
+    if(state.step > 0){ state.step -= 1; render(); }
+  });
+
+  $('resetBtn').addEventListener('click',()=>{
+    state.step = 0;
+    state.program = null;
+    state.answers = { fiscalYear:new Date().getFullYear() };
+    state.statuses = {};
+    state.memos = {};
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
